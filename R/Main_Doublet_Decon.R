@@ -151,6 +151,7 @@ Main_Doublet_Decon<-function(rawDataFile, groupsFile, filename, location, fullDa
                as.numeric(quantile(data.matrix(data$processed[2:nrow(data$processed), 2:ncol(data$processed)]), 0.99)),  #end point of color key
                by=0.05) #length of sub-division
     mycol <- colorpanel(n=length(breaks)-1, low="black", high= "yellow") #heatmap colors
+    pdf('DDheatmap1.pdf',w=12,h=8)
     suppressWarnings(DDheatmap(data.matrix(data$processed[2:nrow(data$processed), 2:ncol(data$processed)]), #the data matrix
                                Colv=FALSE, # No clustering of columns
                                Rowv = FALSE, #no clustering of rows
@@ -167,6 +168,7 @@ Main_Doublet_Decon<-function(rawDataFile, groupsFile, filename, location, fullDa
                                xlab = "Samples", #x axis title
                                ylab =  "Genes", # y axis title
                                main = paste0("Original data: ", filename))) #main title
+    devo.off()
     }
 
   #Remove cell cycle gene cluster (optional)
@@ -299,6 +301,7 @@ Main_Doublet_Decon<-function(rawDataFile, groupsFile, filename, location, fullDa
                as.numeric(quantile(data.matrix(doublets_matrix[2:nrow(doublets_matrix), 2:ncol(doublets_matrix)]), 0.99)),  #end point of color key
                by=0.05) #length of sub-division
     mycol <- colorpanel(n=length(breaks)-1, low="black", high= "yellow") #heatmap colors
+    pdf('DDheatmap2.pdf',w=12,h=8)
     suppressWarnings(DDheatmap(data.matrix(doublets_matrix[2:nrow(doublets_matrix), 2:ncol(doublets_matrix)]), #the data matrix
                                Colv=FALSE, # No clustering of columns
                                Rowv = FALSE, #no clustering of rows
@@ -315,6 +318,7 @@ Main_Doublet_Decon<-function(rawDataFile, groupsFile, filename, location, fullDa
                                xlab = "Samples", #x axis title
                                ylab =  "Genes", # y axis title
                                main = paste0("Doublets: ", filename))) #main title)
+    dev.off()
   }
 
   #Subset expression matrix for non-doublets and save
@@ -331,6 +335,7 @@ Main_Doublet_Decon<-function(rawDataFile, groupsFile, filename, location, fullDa
                as.numeric(quantile(data.matrix(nondoublets_matrix[2:nrow(nondoublets_matrix), 2:ncol(nondoublets_matrix)]), 0.99)),  #end point of color key
                by=0.05) #length of sub-division
     mycol <- colorpanel(n=length(breaks)-1, low="black", high= "yellow") #heatmap colors
+    pdf('DDheatmap3.pdf',w=12,h=8)
     suppressWarnings(DDheatmap(data.matrix(nondoublets_matrix[2:nrow(nondoublets_matrix), 2:ncol(nondoublets_matrix)]), #the data matrix
                                Colv=FALSE, # No clustering of columns
                                Rowv = FALSE, #no clustering of rows
@@ -347,6 +352,7 @@ Main_Doublet_Decon<-function(rawDataFile, groupsFile, filename, location, fullDa
                                xlab = "Samples", #x axis title
                                ylab =  "Genes", # y axis title
                                main = paste0("Non-Doublets: ", filename))) #main title
+    dev.off()
   }
 
   #last message
