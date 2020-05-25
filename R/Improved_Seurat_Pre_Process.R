@@ -21,7 +21,7 @@ Improved_Seurat_Pre_Process <- function(seuratObject, num_genes=50, write_files=
   
   #extract top 50 genes
   seuratObject.markers=FindAllMarkers(object = seuratObject, only.pos = TRUE, min.pct=0.25, logfc.threshold = 0.25)
-  cluster1.markers=FindMarkers(object = seuratObject, ident.1 =0, thresh.use = 0.25, test.use = "roc", only.pos=TRUE)
+  cluster1.markers=FindMarkers(object = seuratObject, ident.1 =1, thresh.use = 0.25, test.use = "roc", only.pos=TRUE)
   genes=seuratObject.markers %>% group_by(cluster) %>% top_n(n = num_genes, wt = avg_logFC)
   
   #extract clusters
